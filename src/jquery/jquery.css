@@ -1,0 +1,160 @@
+.switcher button,
+.switcher h4{
+	margin-left: 40px;
+}
+
+.switcher {
+	background-color: lightgrey;
+	width: 300px;
+}
+
+.main-body.narrow {
+	width: 200px;
+}
+
+.main-body.blue {
+	color: mediumblue;
+}
+
+.selectedWidth {
+	font-weight: 900;
+	color: mediumvioletred;
+	background-color: white;
+	border: 3px solid black;
+}
+
+.defaultWidth {
+	font-weight: 900;
+	color: black;
+	background-color: white;
+	border: 3px solid black;
+}
+
+.colorBlue {
+	font-weight: 900;
+	color: mediumblue;
+	background-color: white;
+	border: 3px solid black;
+}
+
+.defaultColor {
+	font-weight: 900;
+	color: black;
+	background-color: white;
+	border: 3px solid black;
+}
+
+/*Second Feature*/
+
+
+.title{
+	display: block;
+}
+
+.container{
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	height: 700px;
+}
+
+.tennis,
+.swimming,
+.boardgames{
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 200px;
+	height: 200px;
+}
+
+.hobby1,
+.hobby2,
+.hobby3{
+	width: 300px;
+	position: relative;
+	display: inline-block;
+}
+
+.tennis{
+	background-image: url("./images/tennis.jpg");
+}
+.swimming{
+	background-image: url("./images/swimming.jpg");
+}
+.boardgames{
+	background-image: url("./images/boardgames.jpg");
+}
+
+.button1a,
+.button2a,
+.button3a,
+.button1b,
+.button2b,
+.button3b,
+.button1c,
+.button2c,
+.button3c{
+	margin-top: 10px;
+	border-radius: 5px;
+}
+
+
+.button1a:hover,
+.button2a:hover,
+.button3a:hover,
+.button1b:hover,
+.button2b:hover,
+.button3b:hover,
+.button1c:hover,
+.button2c:hover,
+.button3c:hover{
+	color: green;
+	font-weight: 900;
+}
+
+.tennis-blurb,
+.swimming-blurb,
+.boardgames-blurb{
+	position: relative;
+	width: 200px;
+	height: 100px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

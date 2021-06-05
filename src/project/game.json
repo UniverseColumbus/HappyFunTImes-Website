@@ -1,0 +1,37 @@
+{
+	"game": {
+		"start": "Hello wonderer.",
+		"wizard": "Choose to be a wizard?",
+		"knight": "Choose to be a knight?"
+	},
+	"wizard": {
+		"text": "You chose the wizard!",
+		"choices":[
+			{
+				"choice": "Enchant the mistress?",
+				"response": "The mistress fell under your spell.<br> You received a magical item!<br> Gain 1 health.",
+				"value": 1
+			},
+			{
+				"choice": "Seduce the mistress?",
+				"response": "The lady slapped you!<br> Lose 1 health.",
+				"value": -1
+			}
+		]
+	},
+	"knight": {
+		"text": "You chose the knight!",
+		"choices":[
+			{
+				"choice": "Chase the Goblin?",
+				"response": "The Goblin got away!<br> Lose 1 health.",
+				"value": -1
+			},
+			{
+				"choice": "Make fun of the Goblin?",
+				"response": "The Goblin became enraged.<br> But, you slayed it and stole it's treasure!<br> Gain 1 health.",
+				"value": 1
+			}
+		]
+	}
+}

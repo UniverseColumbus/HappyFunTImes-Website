@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="../jquery-3.5.1.min.js"></script>
+  <link rel="stylesheet" href="./game.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <style>
+  canvas {
+    border:1px solid #d3d3d3;
+    background-color: #f1f1f1;
+  }
+  </style>
+
+</head>
+<body onload="startGame()">
+
+
+<script>
+var myGamePiece;
+var myObstacles = [];
+var myScore;
+var crash = false;
+var myInterval;
+var speed = 0;
+var landed = false;
+var jumpHeight = 100;
+var isJumpHeight = false;
+var isClick = false;
+var rockbottom; 
+var landedCounter = 0;
+var pastMidway = false;
+
+var landtop;
+var myleft; 
+var myright; 
+var mytop;
+var mybottom;
+var otherleft;
+var otherright;
+var othertop;
+var otherbottom;
+var isRockbottom = true;
+// start here
+
+function speedUp(){
+  if (speed == 1){
+    if (crash == false){
+      clearInterval(myInterval);
+      myInterval = setInterval(updateGameArea, 7);
+    } 
+    else if(crash == true){
+      clearInterval(myInterval);
+    }
+  }
+
+  if (speed == 0){
+    if (crash == false){
+      clearInterval(myInterval);
+      myInterval = setInterval(updateGameArea, 10);
+    } 
+    else if(crash == true){
+      clearInterval(myInterval);
+    }
+    speed = 1;
+  }
+}
+
+function startOver(){
+  location.reload();
+}
+
+function startGame() {
+  myGamePiece = new component(30, 30, "mediumvioletred", 10, 270);
+  myScore = new component("30px", "Consolas", "black", 250, 40, "text");
+  myGameArea.start();
+}
+
+
+
+var myGameArea = {
+  canvas : document.createElement("canvas"),
+  start : function() {
+    this.canvas.width = 480;
+    this.canvas.height = 270;
+    rockbottom = myGameArea.canvas.height - myGamePiece.height;
+    this.context = this.canvas.getContext("2d");
+    
+    var homelink = document.createElement("a");
+    homelink.setAttribute("href", "../index.html");
+    homelink.setAttribute("style", "margin-right:440px")
+    var homelinkcontent = document.createTextNode("Home");
+    homelink.appendChild(homelinkcontent);
+    document.body.insertBefore(homelink, document.body.childNodes[0]);
+
+    var newContent = document.createTextNode("My Game");
+    var newTitle = document.createElement("h1");
+    newTitle.appendChild(newContent);
+    document.body.insertBefore(newTitle, document.body.childNodes[1]);
+
+    document.body.insertBefore(this.canvas, document.body.childNodes[2]);
+    this.frameNo = 0;
+    myInterval = setInterval(updateGameArea, 15);
+
+    window.addEventListener('keydown', function (e) {
+      e.preventDefault();
+      myGameArea.keys = (myGameArea.keys || []);
+      myGameArea.keys[e.keyCode] = (e.type == "keydown");
+    })
+    window.addEventListener('keyup', function (e) {
+      myGameArea.keys[e.keyCode] = (e.type == "keydown");
+    })
+  },
+  clear : function() {
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  }
+}
+
+
+function component(width, height, color, x, y, type) {
+  this.type = type;
+  this.score = 0;
+  this.width = width;
+  this.height = height;
+  this.speedX = 0;
+  this.speedY = 0;
+  this.speedZ = 0;    
+  this.x = x;
+  this.y = y;
+  
+  this.update = function() {
+    ctx = myGameArea.context;
+    if (this.type == "text") {
+        ctx.font = this.width + " " + this.height;
+        ctx.fillStyle = color;
+        ctx.fillText(this.text, this.x, this.y);
+    } else {
+        ctx.fillStyle = color;
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+    }
+  }
+  this.newPos = function() {
+    var midway = myGameArea.canvas.width/2;
+    if (this.x < midway && pastMidway == false){
+      this.x += this.speedX;
+      if (this.x >= midway-10){
+        pastMidway = true;
+      }
+    }else if (pastMidway == true){
+      this.x -= this.speedX;
+      if(this.x < 10){
+        pastMidway = false;
+      }
+    }
+
+    if (isClick == true){
+      this.y = this.y - 10;
+      isClick = false;
+    }
+    
+    
+    
+    if (this.y >= jumpHeight && isRockbottom == false && isJumpHeight == true){
+      console.log("down");
+      if (myleft > otherright && landed == true){
+        landed = false;
+      }
+      if (landed == false){
+        this.y += 2;
+      }
+      
+    } else if (this.y >= jumpHeight-10 && isJumpHeight == false && this.y < 239){
+      console.log("up");
+      this.y -= this.speedY;
+
+      if (this.y <= jumpHeight){
+        isJumpHeight = true;
+      }
+    } 
+    this.hitBottom();
+  }
+
+  this.hitBottom = function() {
+    if (this.y >= rockbottom) {
+        this.y = rockbottom;
+        isRockbottom = true;
+        isJumpHeight = false;
+    }
+  }
+  this.crashWith = function(otherobj) {
+    landtop = otherobj.y - 33;
+    landbottom = otherobj.y -2;
+
+    myleft = this.x;
+    myright = this.x + (this.width);
+    mytop = this.y;
+    mybottom = this.y + (this.height);
+    otherleft = otherobj.x;
+    otherright = otherobj.x + (otherobj.width);
+    othertop = otherobj.y;
+    otherbottom = otherobj.y + (otherobj.height);
+    crash = false;
+    if (mybottom < othertop && mytop > landtop && myright >= otherleft && myleft <= otherright){
+      console.log("landed");
+      landed = true;
+      landedCounter++;
+    } else if (myright >= otherleft && myleft <= otherright && mybottom > othertop) {
+      crash = true;
+    }
+    return crash;
+  }
+}
+
+function updateGameArea() {
+  var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+  for (i = 0; i < myObstacles.length; i += 1) {
+    crash = myGamePiece.crashWith(myObstacles[i]);
+    if (crash == true) {
+      console.log("crash is: ", crash);
+      clearInterval(myInterval);
+      return;
+    } else if (landed == true && crash == false){
+      if (myleft > otherright && myright > otherleft){
+        console.log("disembark");
+        myGamePiece.gravity = 0.1;
+        landed = false;
+      } 
+    }
+  }
+  myGameArea.clear();
+  myGameArea.frameNo += 1;
+  if (myGameArea.frameNo == 1 || everyinterval(150)) {
+    x = myGameArea.canvas.width;
+    topGap = Math.floor(Math.random()*(100)+155);
+    height = 270 - topGap;
+   
+    myObstacles.push(new component(20, height, "seagreen", x, topGap));
+  }
+  for (i = 0; i < myObstacles.length; i += 1) {
+    myObstacles[i].x += -1;
+    myObstacles[i].update();
+  }
+  myScore.text="Landed Score: " + landedCounter;
+  myScore.update();
+
+  if (myGameArea.keys && myGameArea.keys[90]) {
+    jump(0.2, 10, true);
+  }
+  if (myGameArea.keys && myGameArea.keys[88]) {
+    speedUp();
+  }
+
+  myGamePiece.newPos();
+  myGamePiece.update();
+}
+
+function everyinterval(n) {
+  if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
+  return false;
+}
+
+function jump(speedX, speedY, clicked) {
+  if (isRockbottom){
+    myGamePiece.speedX = speedX;
+    myGamePiece.speedY = speedY;
+    isClick = clicked;
+    isRockbottom = false;
+  }
+}
+</script>
+</div>
+<br>
+<div class="button-box">
+  <button onmousedown="jump(0.3, 10, true)" id="jump">Jump</button>
+  <button style="margin-top: 10px;" onclick="speedUp()" id="speed-up">Speed Up</button>
+  <button style="margin-top: 10px;" onclick="startOver()" id="start-over">Start Over</button>
+</div>
+
+<p><b>Press Z</b> to jump.<br><b>Press X</b> to speed up.<br>Jump on top of the green columns to get a big score.</p>
+<p>I modified the code from w3schools at <a href="https://www.w3schools.com/graphics/game_intro.asp" target="_blank">Reference</a><br>
+<div style="width:300px">I changed the physics from using gravity to using jumps where you can only jump after hitting the ground again.
+In mine I also changed the collision detection so that you can land on top of the columns instead of avoiding them altogether.
+Additionally, I modified the column objects the game spawns to only rise out of the ground.
+Lastly, I changed the scoring system from counting frames, to counting the time spent landed on columns.</div></p>
+</body>
+</html>

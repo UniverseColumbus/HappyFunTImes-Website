@@ -1,0 +1,277 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+p{
+	margin: 10px;
+}
+body{
+	background-color: bisque;
+	height: 100vh;
+	background-image: url('images/colors.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+ul{
+	list-style-type: none;
+}
+pre {
+	font-family: Times New Roman, Serif;
+	line-height: normal;
+	font-size: normal;
+	line-height: 1em;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.login-container{
+	display: flex;
+	justify-content: flex-end;
+}
+
+.account-form{
+	width: 500px;
+	height: 400px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 20px;
+	background-color: lightgrey;
+	border-radius: 10px;
+}
+
+.account-form p{
+	margin: 20px;
+}
+
+.account-form h3{
+	align-self: start;
+	margin-left: 20px;
+	margin-bottom: 10px;
+}
+
+.submit-button{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 5px;
+	border-radius: 10px;
+}
+
+.submit-button:hover{
+	background-color: dimgrey;
+	font-weight: bold;
+	color: white;
+}
+
+.confirmation-bubble{
+	width: auto;
+	height: 100px;
+	background-color: pink;
+	border-radius: 10px;
+}
+
+.name{
+	font-family: 'Nerko One', cursive;
+	font-size: 20px;
+}
+
+/***********************************/
+
+.login-form{
+	width: 300px;
+	height: 200px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 20px;
+	background-color: lightgrey;
+	border-radius: 10px;
+}
+
+.login-form h3{
+	align-self: start;
+	margin-left: 10px;
+	margin-bottom: 10px;
+}
+
+
+.nav-container a{
+	text-decoration: none;
+	color: orange;
+}
+.nav-container a:hover{
+	color: pink;
+}
+.nav-container li{
+	margin-bottom: 5px;
+}
+.nav-container{
+	max-width: 100px;
+  display: inline-block;
+  position: absolute;
+  left: 22px;
+  top: 10px;
+}
+#hamburger {
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+.hide{
+	display: none;
+}
+.show{
+	display: block;
+}
+
+
+
+
+
+.dragon-container{
+	width: 500px;
+	height: 500px;
+	background-image: url('./images/dragon.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: absolute;
+	left: 300px;
+	top: 50px;
+}
+
+.login-create-container{
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+
+.login-create-account a{
+	text-decoration: none;
+	color: orange;
+	margin-left: 10px;
+}
+
+.login-create-account a:hover{
+	color: pink;
+}
+
+.dragon-container h1{
+	font-family: 'Nerko One', cursive;
+	font-size: 36px;
+	color: orange;
+}
+
+.dragon-container h1 .green{
+	color: limegreen;
+}
+
+/*****************************************/
+
+.welcome{
+	font-size: 40px;
+	color: limegreen;
+	font-family: 'Nerko One', cursive;
+}
+
+.account-container{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.game-container{
+	width: 500px;
+	height: 300px;
+	background-color: lightgrey;
+	border-radius: 10px;
+}
+
+.main-game-content{
+	height: 150px;
+}
+
+.start-health-container{
+	position: relative;
+	margin-left: 20px;
+}
+
+.health,
+.usertype{
+	position: relative;
+	font-family: 'Nerko One', cursive;
+	margin-bottom: 20px;
+}
+.usertype{
+	margin-bottom: 5px;
+}
+
+.start-over-button,
+.fight-dragon-button{
+	padding: 5px 10px;
+	border-radius: 5px;
+}
+
+.option1,
+.option2{
+	margin-left: 20px;
+	padding: 5px 10px;
+	border-radius: 5px;
+}
+
+.game-text{
+	margin-left: 20px;
+	margin-top: 20px;
+}
+
+.about-text{
+	width: 1000px;
+	font-size: 32px;
+	color: orange;
+}
+
+.about-page{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.greyed-out{
+	color: #a6a6a6;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

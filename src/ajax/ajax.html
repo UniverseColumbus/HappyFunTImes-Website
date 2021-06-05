@@ -1,0 +1,26 @@
+<html>
+<head>
+	<script src="ajax.js"></script>
+</head>
+<body>
+	<p><a href="../index.html">Home</a></p>
+	<h1>Ajax Get and Post Method</h1>
+	
+	<p style="color:red;">**************************************************************</p>
+	<p><strong>Post email to database:</strong></p>
+	<input id="post-email" type="email">
+	<button onClick="post(document.getElementById('post-email').value)">Send Email!</button>
+	<p id="posted-email"></p>
+	
+	<p style="color:red;">**************************************************************</p>
+	<p><strong>Get email from database:</strong></p>
+	<input id="get-email" type="email">
+	<button onClick="get(document.getElementById('get-email').value)">Get Email!</button>
+	<p id="gotten-email"></p>
+	
+	<p style="color:red;">**************************************************************</p>
+	<p><strong>Details of most recent transaction:</strong></p>
+	<p id="details"></p>
+
+</body>
+</html>
